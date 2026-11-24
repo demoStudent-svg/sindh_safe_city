@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Sindh Safe City</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="auth-page">
+  <main class="auth-card">
+    <div class="brand">
+      <div class="brand-mark"><i data-lucide="shield-check"></i></div>
+      <div><h1>Sindh Safe City</h1><p>AI Surveillance & Smart Enforcement</p></div>
+    </div>
+    <h2>Welcome back</h2>
+    <p class="auth-subtitle">Sign in to manage the safe city system.</p>
+    <form id="authForm" novalidate>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <div class="input-wrap"><i data-lucide="mail"></i><input id="email" type="email" autocomplete="email" placeholder="officer@safecity.pk"></div>
+        <div class="field-error"></div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-wrap"><i data-lucide="lock-keyhole"></i><input id="password" type="password" autocomplete="current-password" placeholder="Enter your password"></div>
+        <div class="field-error"></div>
+      </div>
+      <button class="btn btn-primary btn-block" id="submitButton" type="submit">Login</button>
+    </form>
+    <p class="auth-switch">Do not have an account? <a href="signup.html">Create account</a></p>
+  </main>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

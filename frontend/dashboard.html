@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Sindh Safe City</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body data-page="dashboard">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark"><i data-lucide="shield-check"></i></div><div><h1>Sindh Safe City</h1><p>Management System</p></div></div>
+      <nav class="nav">
+        <a class="nav-link" data-page="dashboard" href="dashboard.html"><i data-lucide="layout-dashboard"></i>Dashboard</a>
+        <a class="nav-link" data-page="cameras" href="cameras.html"><i data-lucide="cctv"></i>Cameras</a>
+        <a class="nav-link" data-page="incidents" href="incidents.html"><i data-lucide="triangle-alert"></i>Incidents</a>
+        <a class="nav-link" href="#" id="aiNav"><i data-lucide="bot"></i>AI Assistant</a>
+      </nav>
+      <div class="sidebar-footer"><button class="nav-link" id="logoutButton" style="width:100%;border:0;background:none"><i data-lucide="log-out"></i>Logout</button></div>
+    </aside>
+    <div class="sidebar-overlay"></div>
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-left"><button class="menu-btn" aria-label="Open menu"><i data-lucide="menu"></i></button><h2>Dashboard</h2></div>
+        <div class="profile"><div class="profile-copy"><strong id="profileName">Loading...</strong><span id="profileRole">Account</span></div><div class="profile-avatar" id="profileAvatar">SC</div></div>
+      </header>
+      <div class="content">
+        <div class="welcome"><div><h1 id="welcomeTitle">Welcome back</h1><p>Here is your safe city system overview.</p></div><span class="date-label" id="currentDate"></span></div>
+        <section class="stats-grid">
+          <div class="stat-card"><div class="stat-copy"><span>Total Cameras</span><strong id="totalCameras">—</strong></div><div class="stat-icon"><i data-lucide="cctv"></i></div></div>
+          <div class="stat-card"><div class="stat-copy"><span>Active Cameras</span><strong id="activeCameras">—</strong></div><div class="stat-icon"><i data-lucide="radio"></i></div></div>
+          <div class="stat-card"><div class="stat-copy"><span>Total Incidents</span><strong id="totalIncidents">—</strong></div><div class="stat-icon"><i data-lucide="triangle-alert"></i></div></div>
+        </section>
+        <section class="dashboard-grid">
+          <div class="panel">
+            <div class="panel-header"><h3>Recent Incidents</h3><a href="incidents.html">View all</a></div>
+            <div class="table-wrap"><table><thead><tr><th>ID</th><th>Type</th><th>Location</th><th>Status</th></tr></thead><tbody id="recentIncidentsBody"><tr><td colspan="4">Loading incidents...</td></tr></tbody></table></div>
+          </div>
+          <div class="panel">
+            <div class="panel-header"><h3>Recent Activity</h3></div>
+            <div class="activity-list" id="activityList"><div class="activity-item"><div><p>Loading activity...</p></div></div></div>
+          </div>
+        </section>
+        <section class="panel" style="margin-top:20px">
+          <div class="panel-header"><h3>Notifications</h3></div>
+          <div class="activity-list" id="notificationList"><div class="activity-item"><div><p>Loading notifications...</p></div></div></div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <button class="ai-fab" id="aiFab" aria-label="Open AI assistant"><i data-lucide="bot"></i></button>
+  <div class="ai-panel" id="aiPanel">
+    <div class="chat-head"><div><strong>Safe City Assistant</strong><span>Online</span></div><button class="modal-close" id="closeAi"><i data-lucide="x"></i></button></div>
+    <div class="chat-messages" id="chatMessages"><div class="chat-message bot">Hello! I am the Safe City assistant. How can I help you today?</div></div>
+    <div class="chat-input"><input id="chatInput" placeholder="Type a message..."><button id="sendChat" aria-label="Send"><i data-lucide="send"></i></button></div>
+  </div>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
