@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f7fb">
+  <meta name="description" content="Sindh Safe City is a university project for camera and incident management to support public safety.">
+  <title>Sindh Safe City | A Safer, Smarter Sindh</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --landing-ink: #172033;
+      --landing-muted: #667085;
+      --landing-border: #e5e7eb;
+      --landing-surface: #fff;
+      --landing-bg: #f5f7fb;
+      --landing-blue: #2563eb;
+      --landing-blue-dark: #1d4ed8;
+      --landing-soft-blue: #eff6ff;
+    }
+
+    body.landing-page {
+      height: 100vh;
+      min-height: 580px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      color: var(--landing-ink);
+      background:
+        radial-gradient(ellipse at 83% 30%, rgba(37,99,235,.055), transparent 34%),
+        var(--landing-bg);
+    }
+    .landing-page a { color: inherit; text-decoration: none; }
+    .landing-container { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+    .landing-header { height: 72px; flex: 0 0 72px; border-bottom: 1px solid var(--landing-border); background: rgba(255,255,255,.92); }
+    .landing-header-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .landing-brand { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; letter-spacing: -.02em; }
+    .landing-brand-mark {
+      width: 38px; height: 38px; display: grid; place-items: center;
+      color: #fff; background: var(--landing-blue); border-radius: 11px;
+      box-shadow: 0 5px 13px rgba(37,99,235,.2);
+    }
+    .landing-brand-mark svg { width: 20px; height: 20px; }
+    .landing-nav { display: flex; align-items: center; }
+    .landing-nav-actions { display: flex; align-items: center; gap: 9px; }
+    .landing-btn {
+      min-height: 40px; padding: 0 15px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      border: 1px solid transparent; border-radius: 8px; color: #fff !important;
+      font-size: 12px; font-weight: 600; transition: background .16s ease, border-color .16s ease;
+    }
+    .landing-btn-primary { background: var(--landing-blue); }
+    .landing-btn-primary:hover { background: var(--landing-blue-dark); }
+    .landing-btn-outline { color: var(--landing-ink) !important; border-color: var(--landing-border); background: #fff; }
+    .landing-btn-outline:hover { border-color: #bfdbfe; background: #f8fbff; }
+    .landing-btn svg { width: 15px; height: 15px; }
+    .landing-main { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: center; gap: 22px; padding: 24px 0 16px; }
+    .hero-grid { display: grid; grid-template-columns: .95fr 1.05fr; align-items: center; gap: 54px; }
+    .hero-copy { max-width: 470px; }
+    .hero-kicker { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 15px; color: var(--landing-blue); font-size: 10px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+    .hero-kicker::before { content: ""; width: 17px; height: 2px; background: currentColor; }
+    .hero-copy h1 { margin: 0; font-size: clamp(38px, 4.25vw, 56px); line-height: 1.08; letter-spacing: -.055em; font-weight: 700; }
+    .hero-copy h1 span { color: var(--landing-blue); }
+    .hero-copy > p { max-width: 430px; margin: 17px 0 20px; color: var(--landing-muted); font-size: 13px; line-height: 1.75; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 9px; }
+    .about-compact { margin-top: 25px; padding-top: 16px; border-top: 1px solid var(--landing-border); }
+    .about-compact h2 { margin: 0 0 6px; color: #344054; font-size: 11px; font-weight: 700; }
+    .about-compact p { max-width: 440px; margin: 0; color: var(--landing-muted); font-size: 11px; line-height: 1.65; }
+
+    .dashboard-preview {
+      overflow: hidden; border: 1px solid #e0e6ef; border-radius: 13px;
+      background: var(--landing-surface); box-shadow: 0 18px 44px rgba(23,32,51,.1);
+    }
+    .preview-topbar { height: 43px; padding: 0 14px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #edf0f4; }
+    .preview-brand { display: flex; align-items: center; gap: 8px; color: #344054; font-size: 9px; font-weight: 700; }
+    .preview-brand svg { width: 15px; height: 15px; color: var(--landing-blue); }
+    .preview-label { color: #7b8798; font-size: 8px; }
+    .preview-content { padding: 15px; }
+    .preview-heading { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 11px; }
+    .preview-heading strong { display: block; color: #172033; font-size: 13px; }
+    .preview-heading span { display: block; margin-top: 4px; color: #7b8798; font-size: 8px; }
+    .preview-tag { padding: 5px 7px; border: 1px solid #e5e7eb; border-radius: 5px; color: #667085; font-size: 8px; }
+    .preview-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 9px; }
+    .preview-stat { min-width: 0; padding: 9px; border: 1px solid #edf0f4; border-radius: 7px; background: #fff; }
+    .preview-stat-label { display: flex; align-items: center; gap: 5px; color: #667085; font-size: 8px; white-space: nowrap; }
+    .preview-stat-label svg { width: 12px; height: 12px; color: var(--landing-blue); }
+    .preview-stat strong { display: block; margin-top: 5px; color: #253248; font-size: 17px; font-weight: 650; }
+    .preview-stat span { display: block; margin-top: 3px; color: #98a2b3; font-size: 7px; }
+    .preview-lower { display: grid; grid-template-columns: 1.25fr .85fr; gap: 8px; }
+    .preview-map, .preview-activity { min-height: 144px; overflow: hidden; border: 1px solid #edf0f4; border-radius: 7px; background: #f9fbfe; }
+    .preview-panel-head { height: 30px; padding: 0 9px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #edf0f4; color: #475467; font-size: 8px; font-weight: 600; }
+    .preview-panel-head span { color: #98a2b3; font-size: 7px; font-weight: 400; }
+    .map-area {
+      position: relative; height: 112px; overflow: hidden;
+      background-color: #f6f9fd;
+      background-image: linear-gradient(30deg, transparent 47%, #dfe7f1 48%, #dfe7f1 49%, transparent 50%), linear-gradient(112deg, transparent 47%, #e6ecf4 48%, #e6ecf4 49%, transparent 50%), linear-gradient(#edf1f6 1px, transparent 1px), linear-gradient(90deg, #edf1f6 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+    }
+    .map-route { position: absolute; inset: 5px; width: calc(100% - 10px); height: calc(100% - 10px); }
+    .map-pin { position: absolute; width: 8px; height: 8px; border: 2px solid #fff; border-radius: 50%; background: #16a34a; box-shadow: 0 0 0 3px rgba(22,163,74,.15); }
+    .map-pin.one { top: 26%; left: 28%; }
+    .map-pin.two { top: 58%; left: 68%; background: #d97706; box-shadow: 0 0 0 3px rgba(217,119,6,.14); }
+    .map-caption { position: absolute; left: 8px; bottom: 6px; color: #667085; font-size: 7px; }
+    .activity-list { padding: 2px 9px; }
+    .activity-row { min-height: 35px; display: flex; align-items: center; gap: 7px; border-bottom: 1px solid #edf0f4; }
+    .activity-row:last-child { border-bottom: 0; }
+    .activity-icon { width: 20px; height: 20px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 5px; color: #b7791f; background: #fff7e6; }
+    .activity-icon.blue { color: var(--landing-blue); background: var(--landing-soft-blue); }
+    .activity-icon svg { width: 11px; height: 11px; }
+    .activity-copy strong { display: block; color: #475467; font-size: 7px; font-weight: 600; }
+    .activity-copy span { display: block; margin-top: 2px; color: #98a2b3; font-size: 6px; }
+    .preview-disclaimer { margin: 8px 0 0; color: #7b8798; font-size: 8px; text-align: right; }
+
+    .features-compact { padding: 12px; border: 1px solid var(--landing-border); border-radius: 10px; background: rgba(255,255,255,.78); }
+    .features-heading { margin: 0 0 10px 2px; color: #344054; font-size: 10px; font-weight: 700; }
+    .features-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    .feature-item { min-width: 0; display: flex; align-items: center; gap: 8px; padding: 8px; border: 1px solid #edf0f4; border-radius: 7px; background: #fff; }
+    .feature-icon { width: 28px; height: 28px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 7px; color: var(--landing-blue); background: var(--landing-soft-blue); }
+    .feature-icon svg { width: 15px; height: 15px; }
+    .feature-copy { min-width: 0; }
+    .feature-copy strong { display: block; color: #344054; font-size: 8px; line-height: 1.3; }
+    .feature-copy span { display: block; overflow: hidden; margin-top: 3px; color: #7b8798; font-size: 7px; line-height: 1.35; text-overflow: ellipsis; }
+    .landing-footer { height: 32px; flex: 0 0 32px; display: flex; align-items: center; border-top: 1px solid var(--landing-border); background: rgba(255,255,255,.65); color: #7b8798; font-size: 9px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+
+    @media (max-width: 900px) {
+      .landing-container { width: min(100% - 36px, 760px); }
+      .landing-main { gap: 17px; }
+      .hero-grid { grid-template-columns: .9fr 1.1fr; gap: 26px; }
+      .hero-copy h1 { font-size: clamp(35px, 5vw, 46px); }
+      .preview-content { padding: 11px; }
+      .preview-map, .preview-activity { min-height: 130px; }
+      .map-area { height: 98px; }
+      .feature-item { gap: 6px; padding: 7px 5px; }
+      .feature-icon { width: 25px; height: 25px; }
+    }
+    @media (max-width: 700px) {
+      body.landing-page { min-height: 680px; }
+      .landing-header { height: 62px; flex-basis: 62px; }
+      .landing-container { width: calc(100% - 32px); }
+      .landing-brand { font-size: 13px; }
+      .landing-brand-mark { width: 34px; height: 34px; }
+      .landing-nav { position: static; display: flex; padding: 0; border: 0; background: transparent; box-shadow: none; }
+      .landing-nav-actions { gap: 6px; }
+      .landing-nav-actions .landing-btn { min-height: 34px; padding: 0 10px; }
+      .landing-main { padding: 12px 0 10px; gap: 11px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 12px; }
+      .hero-copy { max-width: none; }
+      .hero-kicker { margin-bottom: 9px; font-size: 9px; }
+      .hero-copy h1 { max-width: 460px; font-size: clamp(34px, 9.5vw, 44px); }
+      .hero-copy > p { margin: 9px 0 12px; font-size: 11px; line-height: 1.55; }
+      .landing-btn { min-height: 36px; }
+      .about-compact { margin-top: 12px; padding-top: 9px; }
+      .about-compact h2 { margin-bottom: 3px; }
+      .about-compact p { font-size: 9px; line-height: 1.45; }
+      .dashboard-preview { max-width: 500px; width: 100%; margin: 0 auto; }
+      .preview-topbar { height: 35px; }
+      .preview-content { padding: 8px; }
+      .preview-heading { margin-bottom: 7px; }
+      .preview-heading strong { font-size: 11px; }
+      .preview-heading span, .preview-tag { font-size: 7px; }
+      .preview-stats { gap: 5px; margin-bottom: 6px; }
+      .preview-stat { padding: 6px; }
+      .preview-stat-label { font-size: 7px; }
+      .preview-stat strong { margin-top: 3px; font-size: 14px; }
+      .preview-stat span { margin-top: 1px; }
+      .preview-lower { grid-template-columns: 1fr .85fr; gap: 5px; }
+      .preview-map, .preview-activity { min-height: 92px; }
+      .preview-panel-head { height: 24px; padding: 0 6px; font-size: 7px; }
+      .map-area { height: 67px; }
+      .activity-list { padding: 1px 5px; }
+      .activity-row { min-height: 22px; gap: 4px; }
+      .activity-icon { width: 16px; height: 16px; }
+      .activity-icon svg { width: 9px; height: 9px; }
+      .activity-copy strong { font-size: 6px; }
+      .activity-copy span { font-size: 5px; }
+      .preview-disclaimer { margin-top: 4px; font-size: 7px; }
+      .features-compact { padding: 8px; }
+      .features-heading { margin-bottom: 6px; font-size: 9px; }
+      .features-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; }
+      .feature-item { min-height: 38px; padding: 5px; }
+      .feature-icon { width: 22px; height: 22px; }
+      .feature-icon svg { width: 12px; height: 12px; }
+      .feature-copy strong { font-size: 7px; }
+      .feature-copy span { margin-top: 2px; font-size: 6px; }
+      .landing-footer { height: 27px; flex-basis: 27px; font-size: 8px; }
+    }
+    @media (max-height: 700px) and (min-width: 701px) {
+      .landing-main { gap: 12px; padding-top: 12px; padding-bottom: 10px; }
+      .hero-grid { gap: 30px; }
+      .hero-copy h1 { font-size: 42px; }
+      .hero-copy > p { margin: 12px 0 14px; }
+      .about-compact { margin-top: 17px; padding-top: 12px; }
+      .preview-content { padding: 10px; }
+      .preview-map, .preview-activity { min-height: 118px; }
+      .map-area { height: 87px; }
+    }
+    @media (max-height: 679px) {
+      body.landing-page { min-height: 0; height: 100vh; overflow: hidden; }
+      .landing-main { padding-top: 8px; padding-bottom: 8px; gap: 8px; }
+      .hero-grid { gap: 14px; }
+      .hero-copy h1 { font-size: clamp(32px, 4vw, 42px); }
+      .hero-copy > p { margin: 9px 0 12px; line-height: 1.5; }
+      .about-compact { margin-top: 12px; padding-top: 8px; }
+      .preview-content { padding: 8px; }
+      .preview-map, .preview-activity { min-height: 98px; }
+      .map-area { height: 68px; }
+      .features-compact { padding: 8px; }
+      .feature-item { padding: 5px; }
+    }
+    @media (max-height: 679px) and (max-width: 700px) {
+      .landing-main { padding-top: 5px; padding-bottom: 5px; gap: 6px; }
+      .hero-grid { gap: 6px; }
+      .hero-copy h1 { font-size: clamp(28px, 8vw, 36px); }
+      .hero-copy > p { margin: 5px 0 7px; font-size: 10px; line-height: 1.35; }
+      .about-compact { margin-top: 7px; padding-top: 6px; }
+      .about-compact p { font-size: 8px; line-height: 1.25; }
+      .preview-map, .preview-activity { min-height: 82px; }
+      .map-area { height: 56px; }
+      .features-compact { padding: 6px; }
+      .features-grid { gap: 4px; }
+      .feature-item { min-height: 32px; padding: 3px; }
+      .feature-icon { width: 18px; height: 18px; }
+      .feature-copy span { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body class="landing-page">
+  <header class="landing-header">
+    <div class="landing-container landing-header-inner">
+      <a class="landing-brand" href="#home" aria-label="Sindh Safe City home">
+        <span class="landing-brand-mark"><i data-lucide="shield-check"></i></span>
+        <span>Sindh Safe City</span>
+      </a>
+      <nav class="landing-nav" aria-label="Account navigation">
+        <div class="landing-nav-actions">
+          <a class="landing-btn landing-btn-outline" href="login.html">Login</a>
+          <a class="landing-btn landing-btn-primary" href="signup.html">Sign Up</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="landing-container landing-main" id="home">
+    <section class="hero-grid" aria-labelledby="welcomeHeading">
+      <div class="hero-copy">
+        <div class="hero-kicker">Sindh Safe City Project</div>
+        <h1 id="welcomeHeading">Building a Safer and <span>Smarter Sindh</span></h1>
+        <p>A connected project workspace for camera records and incident management—designed to support informed public-safety operations.</p>
+        <div class="hero-actions">
+          <a class="landing-btn landing-btn-primary" href="login.html">Login <i data-lucide="arrow-up-right"></i></a>
+          <a class="landing-btn landing-btn-outline" href="signup.html">Get Started</a>
+        </div>
+        <section class="about-compact" id="about" aria-labelledby="aboutHeading">
+          <h2 id="aboutHeading">About the project</h2>
+          <p>A university project exploring how connected management tools can support public safety in Sindh. Automated camera detection and enforcement are not represented as active features.</p>
+        </section>
+      </div>
+
+      <div class="dashboard-preview" role="img" aria-label="Illustrative dashboard preview; not live monitoring data">
+        <div class="preview-topbar">
+          <div class="preview-brand"><i data-lucide="shield-check"></i>SINDH SAFE CITY</div>
+          <span class="preview-label">ILLUSTRATIVE OVERVIEW</span>
+        </div>
+        <div class="preview-content">
+          <div class="preview-heading">
+            <div><strong>Operations dashboard</strong><span>Camera and incident overview</span></div>
+            <span class="preview-tag">Project view</span>
+          </div>
+          <div class="preview-stats">
+            <div class="preview-stat"><div class="preview-stat-label"><i data-lucide="cctv"></i>Cameras</div><strong>—</strong><span>Backend data</span></div>
+            <div class="preview-stat"><div class="preview-stat-label"><i data-lucide="radio"></i>Active</div><strong>—</strong><span>Backend data</span></div>
+            <div class="preview-stat"><div class="preview-stat-label"><i data-lucide="triangle-alert"></i>Incidents</div><strong>—</strong><span>Backend data</span></div>
+          </div>
+          <div class="preview-lower">
+            <div class="preview-map">
+              <div class="preview-panel-head">City overview <span>Illustration</span></div>
+              <div class="map-area">
+                <svg class="map-route" viewBox="0 0 320 150" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M-5 107 C55 97 64 43 118 63 S194 123 241 76 286 48 330 30" fill="none" stroke="#7eaaf0" stroke-width="2" stroke-dasharray="5 5"/>
+                  <path d="M36 -5 C67 39 105 53 130 87 S191 115 205 158" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+                </svg>
+                <i class="map-pin one"></i><i class="map-pin two"></i>
+                <span class="map-caption">Illustrative view · not a live feed</span>
+              </div>
+            </div>
+            <div class="preview-activity">
+              <div class="preview-panel-head">Workspace <span>Example</span></div>
+              <div class="activity-list">
+                <div class="activity-row"><span class="activity-icon"><i data-lucide="triangle-alert"></i></span><div class="activity-copy"><strong>Incident records</strong><span>Review and manage</span></div></div>
+                <div class="activity-row"><span class="activity-icon blue"><i data-lucide="cctv"></i></span><div class="activity-copy"><strong>Camera records</strong><span>Status and location</span></div></div>
+                <div class="activity-row"><span class="activity-icon blue"><i data-lucide="layout-dashboard"></i></span><div class="activity-copy"><strong>System overview</strong><span>Backend-provided data</span></div></div>
+              </div>
+            </div>
+          </div>
+          <p class="preview-disclaimer">Illustrative preview · figures are not live data</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="features-compact" id="features" aria-labelledby="featuresHeading">
+      <h2 class="features-heading" id="featuresHeading">Project features</h2>
+      <div class="features-grid">
+        <div class="feature-item"><span class="feature-icon"><i data-lucide="scan-eye"></i></span><div class="feature-copy"><strong>AI Surveillance</strong><span>Assistant for system queries</span></div></div>
+        <div class="feature-item"><span class="feature-icon"><i data-lucide="cctv"></i></span><div class="feature-copy"><strong>Camera Monitoring</strong><span>Records and statuses</span></div></div>
+        <div class="feature-item"><span class="feature-icon"><i data-lucide="clipboard-list"></i></span><div class="feature-copy"><strong>Incident Management</strong><span>Create and track records</span></div></div>
+        <div class="feature-item"><span class="feature-icon"><i data-lucide="traffic-cone"></i></span><div class="feature-copy"><strong>Traffic Violations</strong><span>Incident category</span></div></div>
+        <div class="feature-item"><span class="feature-icon"><i data-lucide="layout-dashboard"></i></span><div class="feature-copy"><strong>Real-Time Dashboard</strong><span>Backend summary data</span></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="landing-footer">
+    <div class="landing-container footer-inner">
+      <span>© <span id="currentYear"></span> Sindh Safe City</span>
+      <span>University project</span>
+    </div>
+  </footer>
+
+  <script>
+    if (window.lucide) window.lucide.createIcons();
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
