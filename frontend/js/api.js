@@ -1,6 +1,6 @@
    (function () {
   const config = Object.freeze({
-    baseUrl: "http://localhost:5000/api",
+    baseUrl: "https://exemplary-caring-production-98b40911.up.railway.app/api",
     tokenKey: "sindhSafeCityToken",
     userKey: "sindhSafeCityUser"
   });
